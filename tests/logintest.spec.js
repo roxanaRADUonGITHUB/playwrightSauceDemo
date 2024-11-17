@@ -43,7 +43,7 @@ test.describe('Login tests', () => {
     await pm.loginPage.login('not_standard_user','not_secret_sauce');
     await pm.loginPage.assertErrorMessage('Epic sadface: Username and password do not match any user in this service');
   });
-  test.only('POM Login failed - USER LOCKED OUT', async ({ page }) => {
+  test('POM Login failed - USER LOCKED OUT', async ({ page }) => {
     await pm.loginPage.login('locked_out_user','secret_sauce');
     await pm.loginPage.assertErrorMessage('Epic sadface: Sorry, this user has been locked out.');
   });
