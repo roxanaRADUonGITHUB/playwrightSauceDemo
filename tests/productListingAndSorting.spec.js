@@ -51,7 +51,7 @@ test('Check that each item has a title - by text', async ({ page }) => {
     await expect(pm.page.locator(`.inventory_item_desc >> nth=${i}`)).toHaveText(itemDescription[i]);
   }
 }); */
-test.only('Check that each item has a description', async ({ page }) => {
+test('Check that each item has a description', async ({ page }) => {
   const itemDescription = await pm.productListingandSorting.getItemsPrices
   const count = await pm.productListingandSorting.getItemsDescriptions();
   for (let i=0;i<count;i++){
@@ -59,7 +59,7 @@ test.only('Check that each item has a description', async ({ page }) => {
   }
 });
 
-test.only('Check that each item has a price', async ({ page }) => {
+test('Check that each item has a price', async ({ page }) => {
   //const itemPrice = await pm.page.locator('.inventory_item_price').allInnerTexts();
   const itemPrice = await pm.productListingandSorting.getItemsPrices();
   const count = await pm.productListingandSorting.countPageItems();
@@ -68,7 +68,7 @@ test.only('Check that each item has a price', async ({ page }) => {
   }
 });
 
-test.only('Check that each item has Add to cart button', async ({ page }) => {
+test('Check that each item has Add to cart button', async ({ page }) => {
    const addToCart = page.locator('.inventory_item_price');
    const count = await pm.productListingandSorting.countPageItems();
    await expect(addToCart).toHaveCount(count);
