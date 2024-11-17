@@ -24,4 +24,7 @@ export default class commomActions{
     async isChecked(selector){
         return await this.page.isChecked(selector);
     }
+    async count(selector){
+     await this.page.count(selector);
+    }
 }
