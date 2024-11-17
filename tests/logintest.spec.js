@@ -27,17 +27,29 @@ test.describe('Login tests', () => {
     await expect(page.locator('.title')).toContainText(/Products/);
   });
 
-  test.only('Login succesful - POM', async ({ page }) => {
-    await page.pause();
+  test('Login succesful - POM', async ({ page }) => {
     await pm.loginPage.login('standard_user','secret_sauce');
     await expect(page.locator('.title')).toContainText(/Products/);
   });
   test('Login failed ', async ({ page }) => {
-    await page.pause();
     await page.locator('#user-name').fill('not_standard_user');
     await page.locator('#password').fill('not_secret_sauce');
     await page.locator('#login-button').click();
     await expect(page.locator('h3')).toContainText(/Epic sadface: Username and password do not match any user in this service/);
+  });
+
+  test.only('POM Login failed - wrong USERNAME and PASSWORD', async ({ page }) => {
+    await page.pause();
+    await pm.loginPage.login('not_standard_user','not_secret_sauce');
+    await pm.loginPage.assertErrorMessage('Epic sadface: Username and password do not match any user in this service');
+  });
+  test('POM Login failed - USER LOCKED OUT', async ({ page }) => {
+    await pm.loginPage.login('not_standard_user','not_secret_sauce');
+    await pm.loginPage.assertErrorMessage('Epic sadface: Username and password do not match any user in this service');
+  });
+  test('POM Login failed - USER LOCKED OUT', async ({ page }) => {
+    await pm.loginPage.login('locked_out_user','not_secret_sauce');
+    await pm.loginPage.assertErrorMessage('Epic sadface: Sorry, this user has been locked out.');
   });
 
 });
