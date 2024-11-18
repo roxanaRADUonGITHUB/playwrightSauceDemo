@@ -75,4 +75,27 @@ test('Check that each item has Add to cart button', async ({ page }) => {
 
 });
 
+test('Test sorting by Name (Z to A) and verify the order of products', async ({page}) => {
+  //standalone ordering of the products
+const titleArray = await pm.productListingandSorting.getItemsTitle();
+titleArray.sort().reverse();
+//await page.locator('[data-test="product-sort-container"]').selectOption('za');
+await pm.productListingandSorting.selectFiterOption('za');
+const count = await pm.productListingandSorting.countPageItems();
+for (let i=0;i<count;i++){
+  //expect each item to be reversed
+await expect (pm.page.locator(`.inventory_item_name >> nth=${i}`)).toHaveText(titleArray[i]);
+}
+});
+
+test.only('Test sorting by Price (high to low) and verify the order of products.', async ({page}) => {
+const priceArray =  ['$49.99','$29.99','$15.99','$15.99','$9.99','$7.99'];
+await pm.productListingandSorting.selectFiterOption('hilo');
+const count = await pm.productListingandSorting.countPageItems();
+for (let i=0;i<count;i++){
+await expect (pm.page.locator(`.inventory_item_price >> nth=${i}`)).toHaveText(priceArray[i]);
+}
+});
+
+
 });
