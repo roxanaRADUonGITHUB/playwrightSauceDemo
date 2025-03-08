@@ -15,9 +15,19 @@ test.describe('Login tests', () => {
   });
 
   test('Verify that clicking on the shopping cart icon redirects the user to the "Your Cart" page.', async ({ page }) => {
-    page.pause();
+    
     await pm.shoppingCartOperations.clickOnShoppingCartIcon();
     await expect(pm.shoppingCartOperations.yourCartTitle).toHaveText('Your Cart');
 
   });
+  test.only('Test adding multiple products to the cart by clicking on the “Add to cart” button, and verify the number badge updates accordingly', async ({page}) => {
+    await page.pause();
+    const numberOfProducts = 3 ;
+    //add products to cart
+    for (let i=1; i<=numberOfProducts;i++)
+    {
+    await pm.productListingandSorting.clickOnAddToCart(i);
+    }
+    await expect(pm.shoppingCartOperations.shoppingCartBadge).toHaveText(`${numberOfProducts}`);
+  })
 });

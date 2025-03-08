@@ -6,6 +6,7 @@ export default class shoppongCartOperations {
         this.actions = new commomActions(page);
         this.shoppingCartIcon = page.locator('[data-test="shopping-cart-link"]');
         this.yourCartTitle = page.locator('[data-test="title"]');
+        this.shoppingCartBadge = page.locator('[data-test="shopping-cart-badge"]');
     }
     async clickOnShoppingCartIcon  () {
         await this.shoppingCartIcon.click();
