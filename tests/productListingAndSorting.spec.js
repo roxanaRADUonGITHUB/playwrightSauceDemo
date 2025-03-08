@@ -88,7 +88,7 @@ await expect (pm.page.locator(`.inventory_item_name >> nth=${i}`)).toHaveText(ti
 }
 });
 
-test.only('Test sorting by Price (high to low) and verify the order of products.', async ({page}) => {
+test('Test sorting by Price (high to low) and verify the order of products.', async ({page}) => {
 const priceArray =  ['$49.99','$29.99','$15.99','$15.99','$9.99','$7.99'];
 await pm.productListingandSorting.selectFiterOption('hilo');
 const count = await pm.productListingandSorting.countPageItems();
