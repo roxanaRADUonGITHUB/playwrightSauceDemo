@@ -14,7 +14,7 @@ test.describe('Login tests', () => {
     await pm.loginPage.login('standard_user','secret_sauce');
   });
 
-  test.only('Verify that clicking on the shopping cart icon redirects the user to the "Your Cart" page.', async ({ page }) => {
+  test('Verify that clicking on the shopping cart icon redirects the user to the "Your Cart" page.', async ({ page }) => {
     page.pause();
     await pm.shoppingCartOperations.clickOnShoppingCartIcon();
     await expect(pm.shoppingCartOperations.yourCartTitle).toHaveText('Your Cart');
