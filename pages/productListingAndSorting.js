@@ -6,12 +6,25 @@ export default class productListingandSorting {
         this.actions = new commomActions(page);
         this.item = page.locator('.inventory_item');
         this.itemsPrice = page.locator('.inventory_item_price');
+        this.itemPrice = page.locator('[data-test="inventory-item-price"]');
         this.itemsDescription = page.locator('.inventory_item_dec');
+        this.itemDescription = page.locator('[data-test="inventory-item-desc"]');
         this.addToCartButton = page.locator('.btn.btn_primary.btn_small.btn_inventory');
         this.itemsTitle = page.locator('.inventory_item_name');
+        this.itemTitle = page.locator('[data-test="inventory-item-name"]');
         this.filter = page.locator('[data-test="product-sort-container"]');
         }
 
+    async getItemPrice(n){
+            return await this.itemPrice.locator(`nth=${n}`).innerText();
+    }    
+    async getItemDescription(n){
+            return await this.itemDescription.locator(`nth=${n}`).innerText();
+    }
+
+    async getItemTitle(n){
+        return await this.itemTitle.locator(`nth=${n}`).innerText();
+    }
     async clickOnAddToCart(index){
         await this.actions.click(`button:nth-match(:text("Add to cart"),${index})`);
     }

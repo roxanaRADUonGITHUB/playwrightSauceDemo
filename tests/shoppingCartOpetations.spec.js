@@ -30,7 +30,7 @@ test.describe('Login tests', () => {
     await expect(pm.shoppingCartOperations.shoppingCartBadge).toHaveText(`${numberOfProducts}`);
   })
 
-  test ('removing a product from the cart by clicking on the “Remove” button, and verify the number badge decreases by one and the product is removed from the cart.', async ({page}) => {
+  test ('Removing a product from the cart by clicking on the “Remove” button, and verify the number badge decreases by one and the product is removed from the cart.', async ({page}) => {
     const numberOfProductsAdded = 3 ;
     //add products to cart
     for (let i=1; i<=numberOfProductsAdded;i++)
@@ -41,14 +41,21 @@ test.describe('Login tests', () => {
       await expect(pm.shoppingCartOperations.shoppingCartBadge).toHaveText(`${numberOfProductsAdded-1}`);
   })
 
-  test.only ('Product details (quantity, title, description, and price) are displayed correctly on the "Your Cart" page', async ({page}) => {
+  test ('Product details (quantity, title, description, and price) are displayed correctly on the "Your Cart" page', async ({page}) => {
     //store title, description, price
-  const title = pm.page.locator(`.inventory_item_name >> nth=${1}`).allInnerTexts();
+    let itemNumber = 0;
+    let details =[];
+    details[0] = await pm.productListingandSorting.getItemTitle(itemNumber);
+    details[1] = await pm.productListingandSorting.getItemDescription(itemNumber);
+    details[2] = await pm.productListingandSorting.getItemPrice(itemNumber);  
 
     //click on add to cart backpack
-    await pm.productListingandSorting.clickOnAddToCart(1);
+    await pm.productListingandSorting.clickOnAddToCart(itemNumber+1);
     //click on cart icon to be redirected to Your cart
     await pm.shoppingCartOperations.clickOnCartIcon();
-    await expect (pm.page.locator('[data-test="inventory-item-name"]')).toHaveText(`${title}`);
+    await expect (pm.shoppingCartOperations.itemTitle).toHaveText(`${details[0]}`);
+    await expect (pm.shoppingCartOperations.itemDescription).toHaveText(`${details[1]}`);
+    await expect (pm.shoppingCartOperations.itemPrice).toHaveText(`${details[2]}`);
+    await expect (pm.shoppingCartOperations.itemQuantity).toHaveText('1');
   })
 });

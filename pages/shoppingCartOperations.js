@@ -8,6 +8,10 @@ export default class shoppingCartOperations {
         this.removeBackPack = page.locator('[data-test="remove-sauce-labs-backpack"]');
         this.yourCartTitle = page.locator('[data-test="title"]');
         this.shoppingCartBadge = page.locator('[data-test="shopping-cart-badge"]');
+        this.itemTitle = page.locator('[data-test="inventory-item-name"]');
+        this.itemDescription = page.locator('[data-test="inventory-item-desc"]');
+        this.itemPrice = page.locator('[data-test="inventory-item-price"]');
+        this.itemQuantity = page.locator('[data-test="item-quantity"]');
     }
     async clickOnShoppingCartIcon  () {
         await this.shoppingCartIcon.click();
