@@ -12,6 +12,10 @@ export default class shoppingCartOperations {
         this.itemDescription = page.locator('[data-test="inventory-item-desc"]');
         this.itemPrice = page.locator('[data-test="inventory-item-price"]');
         this.itemQuantity = page.locator('[data-test="item-quantity"]');
+        this.continueShoppingBtn = page.locator('[data-test="continue-shopping"]');
+    }
+    async clickOnContinueShopping () {
+        await this.continueShoppingBtn.click();
     }
     async clickOnShoppingCartIcon  () {
         await this.shoppingCartIcon.click();

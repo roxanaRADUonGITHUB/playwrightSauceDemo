@@ -42,20 +42,35 @@ test.describe('Login tests', () => {
   })
 
   test ('Product details (quantity, title, description, and price) are displayed correctly on the "Your Cart" page', async ({page}) => {
-    //store title, description, price
     let itemNumber = 0;
-    let details =[];
-    details[0] = await pm.productListingandSorting.getItemTitle(itemNumber);
-    details[1] = await pm.productListingandSorting.getItemDescription(itemNumber);
-    details[2] = await pm.productListingandSorting.getItemPrice(itemNumber);  
+    //store title, description, price from products page
+    let itemDetails =[];
+    itemDetails[0] = await pm.productListingandSorting.getItemTitle(itemNumber);
+    itemDetails[1] = await pm.productListingandSorting.getItemDescription(itemNumber);
+    itemDetails[2] = await pm.productListingandSorting.getItemPrice(itemNumber);  
 
+    //store title, description, price from products page
+    let cartDetails =[];
+    cartDetails[0] = await pm.shoppingCartOperations.itemTitle;
+    cartDetails[1] = await pm.shoppingCartOperations.itemDescription;
+    cartDetails[2] = await pm.shoppingCartOperations.itemQuantity; 
     //click on add to cart backpack
     await pm.productListingandSorting.clickOnAddToCart(itemNumber+1);
     //click on cart icon to be redirected to Your cart
     await pm.shoppingCartOperations.clickOnCartIcon();
+    //assertion
     await expect (pm.shoppingCartOperations.itemTitle).toHaveText(`${details[0]}`);
     await expect (pm.shoppingCartOperations.itemDescription).toHaveText(`${details[1]}`);
     await expect (pm.shoppingCartOperations.itemPrice).toHaveText(`${details[2]}`);
     await expect (pm.shoppingCartOperations.itemQuantity).toHaveText('1');
+  })
+  test.only ('Verify that clicking the "Continue shopping" button redirects the user back to the product list page', async ({page}) => {
+//click on cart icon 
+await pm.shoppingCartOperations.clickOnCartIcon();
+//click on Continue to Shopping button
+await pm.shoppingCartOperations.clickOnContinueShopping();
+//assertion on page title
+await expect(page.locator('.title')).toContainText(/Products/);
+
   })
 });
