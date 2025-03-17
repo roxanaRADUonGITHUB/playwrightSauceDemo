@@ -64,7 +64,7 @@ test.describe('Login tests', () => {
     await expect (pm.shoppingCartOperations.itemPrice).toHaveText(`${details[2]}`);
     await expect (pm.shoppingCartOperations.itemQuantity).toHaveText('1');
   })
-  test.only ('Verify that clicking the "Continue shopping" button redirects the user back to the product list page', async ({page}) => {
+  test ('Verify that clicking the "Continue shopping" button redirects the user back to the product list page', async ({page}) => {
 //click on cart icon 
 await pm.shoppingCartOperations.clickOnCartIcon();
 //click on Continue to Shopping button
