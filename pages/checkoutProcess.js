@@ -10,9 +10,14 @@ export default class checkoutProcess {
     this.firstNameInput = page.locator('[data-test="firstName"]');
     this.lastNameInput = page.locator('[data-test="lastName"]');
     this.zipInput = page.locator('[data-test="postalCode"]');
-    this.continueBtn = page.locator('[id="continue"]')
+    this.continueBtn = page.locator('[id="continue"]');
+    this.errorMsg = page.locator('[data-test="error"]');
+    this.cancelBtn = page.locator('[data-test="cancel"]')
     
 }
+    async clickOnCancelBtn(){
+        await this.cancelBtn.click();
+    }
     async clickOnContinueBtn(){
         await this.continueBtn.click();
     }
