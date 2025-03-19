@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 import PomManager from '../pages/PomManager.js';
-import { count } from 'console';
+
 
 let pm;
 test.describe('Checkout Process', () => {
@@ -85,5 +85,25 @@ test.describe('Checkout Process', () => {
           await pm.checkoutProcess.clickOnContinueBtn();
           await expect(pm.checkoutProcess.checkoutOverviewTitle).toContainText(/Checkout: Overview/);
         });
+
+        test ('Test that the "Checkout: Overview" page displays the order details (Products list, Payment Information, Shipping Information, Price total, and Total - one product).', async ({ page }) => {
+          let itemNumber = 0;
+          await pm.productListingandSorting.clickOnAddToCart(itemNumber +1);
+          let itemName = await pm.productListingandSorting.getItemTitle(itemNumber);
+          await pm.shoppingCartOperations.clickOnShoppingCartIcon();
+          await pm.checkoutProcess.clickOnCheckoutBtn();
+          await pm.checkoutProcess.typeFirstName('First Name');
+          await pm.checkoutProcess.typeLastName('Last Name');
+          await pm.checkoutProcess.typeZip('0001')
+          await pm.checkoutProcess.clickOnContinueBtn();
+
+          await expect(pm.checkoutProcess.paymentInformation).toContainText(/Payment Information:/);
+          await expect(pm.checkoutProcess.shippingInformation).toContainText(/Shipping Information:/);
+          await expect(pm.checkoutProcess.priceTotal).toContainText(/Price Total/);
+          await expect(pm.checkoutProcess.total).toContainText(/Total/);
+          await expect (pm.checkoutProcess.productListingName).toContainText(itemName);
+          
+        });
+
 
 });

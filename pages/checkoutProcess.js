@@ -12,7 +12,12 @@ export default class checkoutProcess {
     this.zipInput = page.locator('[data-test="postalCode"]');
     this.continueBtn = page.locator('[id="continue"]');
     this.errorMsg = page.locator('[data-test="error"]');
-    this.cancelBtn = page.locator('[data-test="cancel"]')
+    this.cancelBtn = page.locator('[data-test="cancel"]');
+    this.paymentInformation = page.locator('[data-test="payment-info-label"]');
+    this.shippingInformation = page.locator('[data-test="shipping-info-label"]');
+    this.priceTotal = page.locator('[data-test="total-info-label"]');
+    this.productListingName = page.locator('[data-test="inventory-item-name"]')
+    this.total = page.locator('[data-test="total-label"]');
     
 }
     async clickOnCancelBtn(){
