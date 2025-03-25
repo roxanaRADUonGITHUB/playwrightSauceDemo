@@ -18,8 +18,16 @@ export default class checkoutProcess {
     this.priceTotal = page.locator('[data-test="total-info-label"]');
     this.productListingName = page.locator('[data-test="inventory-item-name"]')
     this.total = page.locator('[data-test="total-label"]');
+    this.finishBtn = page.locator('[data-test="finish"]');
+    this.backHomeBtn =page.locator('[data-test="back-to-products"]');
     
 }
+    async clickOnBackHomeBtn(){
+        await this.backHomeBtn.click();
+    } 
+    async clickOnFinishBtn(){
+        await this.finishBtn.click();
+    }
     async clickOnCancelBtn(){
         await this.cancelBtn.click();
     }
